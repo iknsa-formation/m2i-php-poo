@@ -4,9 +4,9 @@ class DBA
 {
     private ?PDO $PDOInstance = null;
 
-    const DEFAULT_SQL_USER = 'formation';
+    const DEFAULT_SQL_USER = 'root';
     const DEFAULT_SQL_HOST = 'localhost';
-    const DEFAULT_SQL_PASS = 'paris';
+    const DEFAULT_SQL_PASS = 'paris123';
     const DEFAULT_SQL_DTB = 'poo';
 
     public function __construct()
