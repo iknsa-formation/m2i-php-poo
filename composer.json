@@ -1,0 +1,7 @@
+{
+    "require": {
+        "phpunit/phpunit": "^9.5",
+        "symfony/http-foundation": "^5.2",
+        "symfony/routing": "^5.2"
+    }
+}
