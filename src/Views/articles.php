@@ -1,5 +1,9 @@
 <?php
 
+use App\Entity\DBA;
+use App\Entity\ArticleManager;
+use App\Entity\Article;
+
 $dba = new DBA();
 $am = new ArticleManager($dba->getPDO());
 $articles = $am->getArticles();

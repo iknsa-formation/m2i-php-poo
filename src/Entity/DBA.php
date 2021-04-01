@@ -1,8 +1,10 @@
 <?php
 
+namespace App\Entity;
+
 class DBA
 {
-    private ?PDO $PDOInstance = null;
+    private ?\PDO $PDOInstance = null;
 
     const DEFAULT_SQL_USER = 'root';
     const DEFAULT_SQL_HOST = 'localhost';
@@ -11,14 +13,16 @@ class DBA
 
     public function __construct()
     {
-        $this->PDOInstance = new PDO(
-            'mysql:dbname=' . self::DEFAULT_SQL_DTB . ';host=' . self::DEFAULT_SQL_HOST,
-            self::DEFAULT_SQL_USER,
-            self::DEFAULT_SQL_PASS
-        );
+        if (!$this->PDOInstance) {
+            $this->PDOInstance = new \PDO(
+                'mysql:dbname=' . self::DEFAULT_SQL_DTB . ';host=' . self::DEFAULT_SQL_HOST,
+                self::DEFAULT_SQL_USER,
+                self::DEFAULT_SQL_PASS
+            );
+        }
     }
 
-    public function getPDO(): ?PDO
+    public function getPDO(): ?\PDO
     {
         return $this->PDOInstance;
     }

@@ -1,5 +1,9 @@
 <?php
 
+use App\Entity\DBA;
+use App\Entity\Article;
+use App\Entity\ArticleManager;
+
 $titre = "";
 $auteur = "";
 $date = "";

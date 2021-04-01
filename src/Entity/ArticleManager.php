@@ -1,16 +1,18 @@
 <?php
 
+namespace App\Entity;
+
 //require_once "autoload.php";
 require_once "Article.php";
 
 class ArticleManager {
-    private PDO $_db;
+    private \PDO $_db;
 
-    public function __construct(PDO $db) {
+    public function __construct(\PDO $db) {
         $this->setDb($db);
     }
 
-    public function setDb(PDO $db) {
+    public function setDb(\PDO $db) {
         $this->_db = $db;
     }
 
@@ -56,7 +58,7 @@ class ArticleManager {
         $ARTICLE = $this->_db->prepare('SELECT * FROM poo.article WHERE id=:id');
         $ARTICLE->bindValue(':id', $article_id);
         $ARTICLE->execute();
-        return $ARTICLE->fetch(PDO::FETCH_ASSOC);
+        return $ARTICLE->fetch(\PDO::FETCH_ASSOC);
     }
 
     public function deleteArticle($article_id) {
