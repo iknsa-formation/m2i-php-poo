@@ -15,6 +15,10 @@ export class ArticleService {
   }
 
   deleteArticle(id: number) {
-    return this.http.delete(this.barUrl + '/articles/5');
+    return this.http.delete(this.barUrl + '/articles/' + id);
+  }
+
+  getArticle(id: number) {
+    return this.http.get(this.barUrl + '/articles/' + id);
   }
 }
