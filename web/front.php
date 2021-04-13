@@ -31,4 +31,3 @@ $framework = new Simplex\Framework($matcher, $controllerResolver, $argumentResol
 $response = $framework->handle($request);
 
 $response->send();
-
