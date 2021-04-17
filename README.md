@@ -16,10 +16,10 @@
 	DocumentRoot "chemin_vers/m2i-php-poo/web"
 	<Directory  "chemin_vers/m2i-php-poo/web/">
 		DirectoryIndex front.php
-        Require all granted
-        RewriteEngine On
-        RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteRule . /front.php [L]
+		Require all granted
+		RewriteEngine On
+		RewriteCond %{REQUEST_FILENAME} !-f
+		RewriteRule . /front.php [L]
 	</Directory>
 </VirtualHost>
 ```
