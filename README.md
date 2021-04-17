@@ -9,6 +9,21 @@
 - create an article table like /Itech/Entity/Article.php
 - run the Symfony Local Web Server from web folder : symfony server:start --port=4321 --passthru=front.php
 
+### Apache 2.4 config
+```
+<VirtualHost *:80>
+	ServerName m2i-poo
+	DocumentRoot "chemin_vers/m2i-php-poo/web"
+	<Directory  "chemin_vers/m2i-php-poo/web/">
+		DirectoryIndex front.php
+        Require all granted
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule . /front.php [L]
+	</Directory>
+</VirtualHost>
+```
+
 ### client (angular 11)
 - install npm
 - install angular CLI : npm install -g @angular/cli
