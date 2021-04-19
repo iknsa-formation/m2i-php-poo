@@ -11,16 +11,17 @@
 
 ### Apache config
 ```
+
 <VirtualHost *:80>
-	ServerName m2i-poo
-	DocumentRoot "chemin/m2i-php-poo/web"
-	<Directory  "chemin/m2i-php-poo/web/">
-		DirectoryIndex front.php
+    ServerName m2i-poo
+    DocumentRoot "e:/projects/course/m2i-php-poo/web"
+    <Directory  "e:/projects/course/m2i-php-poo/web/">
+    DirectoryIndex front.php
         Require all granted
         RewriteEngine On
         RewriteCond %{REQUEST_FILENAME} !-f
         RewriteRule . /front.php [L]
-	</Directory>
+    </Directory>
 </VirtualHost>
 
 ```
