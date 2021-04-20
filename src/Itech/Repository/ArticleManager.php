@@ -17,7 +17,7 @@ class ArticleManager {
     public function addArticle(Article $article)
     {
         $ADD_ARTICLE = $this->_db->prepare('
-            INSERT INTO poo.article 
+            INSERT INTO article 
             SET titre=:titre, auteur=:auteur, date=:date, image=:image, message=:message');
 
         $ADD_ARTICLE->bindValue(':titre', $article->getTitre());
@@ -32,7 +32,7 @@ class ArticleManager {
     public function getArticles(): array
     {
         $sth =  $this->_db->prepare(
-            'SELECT * FROM poo.article'
+            'SELECT * FROM article'
         );
 
         $sth->execute();
@@ -42,7 +42,7 @@ class ArticleManager {
     public function updateArticle(Article $article)
     {
         $UP_ARTICLE = $this->_db->prepare('
-        UPDATE poo.article 
+        UPDATE article 
         SET titre=:titre, auteur=:auteur, image=:image, message=:message WHERE id=:id');
         $UP_ARTICLE->bindValue(':titre', $article->getTitre());
         $UP_ARTICLE->bindValue(':auteur', $article->getAuteur());
@@ -53,7 +53,7 @@ class ArticleManager {
     }
 
     public function getArticle($article_id) {
-        $ARTICLE = $this->_db->prepare('SELECT * FROM poo.article WHERE id=:id');
+        $ARTICLE = $this->_db->prepare('SELECT * FROM article WHERE id=:id');
         $ARTICLE->bindValue(':id', $article_id);
         $ARTICLE->execute();
         return $ARTICLE->fetch(\PDO::FETCH_ASSOC);
@@ -61,7 +61,7 @@ class ArticleManager {
 
     public function deleteArticle($article_id) {
         $article_id = (int) $article_id;
-        $ARTICLE = $this->_db->prepare('DELETE FROM poo.article WHERE id=:id');
+        $ARTICLE = $this->_db->prepare('DELETE FROM article WHERE id=:id');
         $ARTICLE->bindValue(':id', $article_id);
         $ARTICLE->execute();
     }

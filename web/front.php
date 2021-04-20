@@ -11,7 +11,10 @@ use Symfony\Component\Routing;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-// ...
+\Simplex\Service\Sanitizer::sanitize();
+
+require_once '../config.php';
+
 $request = Request::createFromGlobals();
 if($request->getMethod() === Request::METHOD_OPTIONS) {
     $response = new Response();

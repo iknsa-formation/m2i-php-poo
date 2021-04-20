@@ -6,10 +6,10 @@ class DBA
 {
     private ?\PDO $PDOInstance = null;
 
-    const DEFAULT_SQL_USER = 'root';
-    const DEFAULT_SQL_HOST = 'localhost';
-    const DEFAULT_SQL_PASS = '';
-    const DEFAULT_SQL_DTB = 'poo';
+    const DEFAULT_SQL_USER = ENV['database']['user'];
+    const DEFAULT_SQL_HOST = ENV['database']['host'];
+    const DEFAULT_SQL_PASS = ENV['database']['password'];
+    const DEFAULT_SQL_DTB = ENV['database']['dbName'];
 
     public function __construct()
     {

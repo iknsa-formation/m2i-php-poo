@@ -43,9 +43,7 @@ class Form
 
                 $object = new $class;
 
-                Hydrator::hydrate($object, $data);
-
-                return $object;
+                return Hydrator::hydrate($object, $data);
             }
         }
 

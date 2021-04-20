@@ -3,9 +3,9 @@
 namespace Itech\Controller;
 
 use Itech\Model\Article;
-use Itech\Model\User;
 use Itech\Repository\ArticleManager;
 use Itech\Repository\DBA;
+use Simplex\Service\Hydrator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,8 +18,7 @@ class ArticleController
 
     public function __construct()
     {
-        $dba = new DBA();
-        $this->articleManager = new ArticleManager($dba->getPDO());
+        $this->articleManager = new ArticleManager((new DBA())->getPDO());
     }
 
     /**
@@ -47,14 +46,20 @@ class ArticleController
     {
         $article = $request->toArray();
         $article['id'] = $id;
-        $this->articleManager->updateArticle(new Article($article));
+
+        /** @var Article $articleObject */
+        $articleObject = Hydrator::hydrate(Article::class, $article);
+        $this->articleManager->updateArticle($articleObject);
         return new Response('update');
     }
 
     public function add(Request $request): Response
     {
         $article = $request->toArray();
-        $this->articleManager->addArticle(new Article($article));
+
+        /** @var Article $articleObject */
+        $articleObject = Hydrator::hydrate(Article::class, $article);
+        $this->articleManager->addArticle($articleObject);
         return new Response('add');
     }
 }

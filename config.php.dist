@@ -1,0 +1,18 @@
+<?php
+/**
+ * Created by iKNSA.
+ * User: Khalid Sookia <khalidsookia@gmail.com>
+ * Date: 20/04/2021
+ * Time: 16:28
+ */
+
+$config = [
+    'database' => [
+        'user' => '',
+        'host' => '',
+        'password' => '',
+        'dbName' => ''
+    ]
+];
+
+define('ENV', $config);

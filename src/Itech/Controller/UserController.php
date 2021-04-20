@@ -10,7 +10,10 @@
 namespace Itech\Controller;
 
 
+use Itech\Model\User;
+use Itech\Repository\UserManager;
 use Simplex\Service\Form;
+use Simplex\Service\Hydrator;
 use Simplex\Templating;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,10 +23,11 @@ class UserController
     public function register(Request $request): Response
     {
         if ($request->getMethod() === Request::METHOD_POST) {
-            /** User $user */
+
+            /** @var User $user */
             $user = Form::handleSubmit($request);
 
-            dd($user);
+            (new UserManager())->create($user);
         }
 
         $templating = new Templating();

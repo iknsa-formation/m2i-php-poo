@@ -16,7 +16,16 @@ class User
 
     private string $email;
 
-    private string $password;
+    /**
+     * @var string Do not store in DB. This is plain password
+     * Used only during processing
+     */
+    private string $password = '';
+
+    /**
+     * @var string To store in DB
+     */
+    private string $encryptedPassword;
 
     private string $firstName;
 
@@ -73,6 +82,29 @@ class User
     public function setPassword(string $password): User
     {
         $this->password = $password;
+
+        if ($password !== '') {
+            $this->encryptPassword();
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEncryptedPassword(): string
+    {
+        return $this->encryptedPassword;
+    }
+
+    /**
+     * @param string $encryptedPassword
+     * @return User
+     */
+    public function setEncryptedPassword(string $encryptedPassword): User
+    {
+        $this->encryptedPassword = $encryptedPassword;
         return $this;
     }
 
@@ -110,5 +142,17 @@ class User
     {
         $this->lastName = $lastName;
         return $this;
+    }
+
+    private function encryptPassword(): User
+    {
+        $this->encryptedPassword = password_hash($this->getPassword(), PASSWORD_BCRYPT);
+
+        return $this;
+    }
+
+    private function verifyPassword(): bool
+    {
+        return password_verify($this->getPassword(), $this->getEncryptedPassword());
     }
 }
