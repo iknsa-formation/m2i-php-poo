@@ -3,6 +3,7 @@
 namespace Itech\Controller;
 
 use Itech\Model\Article;
+use Itech\Model\User;
 use Itech\Repository\ArticleManager;
 use Itech\Repository\DBA;
 use Symfony\Component\HttpFoundation\Request;

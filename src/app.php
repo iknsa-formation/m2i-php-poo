@@ -28,4 +28,8 @@ $routes->add('update_article', new Routing\Route('/articles/{id}', [
     '_controller' => 'Itech\Controller\ArticleController::update',
 ], [], [], '', [], ['PUT']));
 
+$routes->add('security_register', new Routing\Route('/register', [
+    '_controller' => 'Itech\Controller\UserController::register',
+], [], [], '', [], ['GET', 'POST']));
+
 return $routes;

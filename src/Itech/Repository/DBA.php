@@ -8,7 +8,7 @@ class DBA
 
     const DEFAULT_SQL_USER = 'root';
     const DEFAULT_SQL_HOST = 'localhost';
-    const DEFAULT_SQL_PASS = 'paris123';
+    const DEFAULT_SQL_PASS = '';
     const DEFAULT_SQL_DTB = 'poo';
 
     public function __construct()

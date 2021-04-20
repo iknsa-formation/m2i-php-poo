@@ -19,6 +19,8 @@ if($request->getMethod() === Request::METHOD_OPTIONS) {
     exit();
 }
 
+$request->attributes->add(['_app_root' => __DIR__ . '/../src/']);
+
 $routes = include __DIR__.'/../src/app.php';
 
 $context = new Routing\RequestContext();
