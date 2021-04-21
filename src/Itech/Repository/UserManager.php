@@ -11,6 +11,7 @@ namespace Itech\Repository;
 
 
 use Itech\Model\User;
+use Simplex\Service\Hydrator;
 
 class UserManager
 {
@@ -37,5 +38,19 @@ class UserManager
         } catch (\PDOException $exception) {
             dd($exception);
         }
+    }
+
+    public function findByEmail(string $email)
+    {
+        $statement = $this->db->prepare(
+            "SELECT * FROM user WHERE email=:email LIMIT 1"
+        );
+        $statement->bindValue('email', $email);
+        $statement->execute();
+        $userData = $statement->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$userData) return false;
+
+        return Hydrator::hydrate(User::class, $userData);
     }
 }

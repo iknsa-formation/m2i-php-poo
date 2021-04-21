@@ -151,8 +151,8 @@ class User
         return $this;
     }
 
-    private function verifyPassword(): bool
+    public function verifyPassword($plainPassword): bool
     {
-        return password_verify($this->getPassword(), $this->getEncryptedPassword());
+        return password_verify($plainPassword, $this->getEncryptedPassword());
     }
 }

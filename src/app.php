@@ -3,6 +3,11 @@
 use Symfony\Component\Routing;
 
 $routes = new Routing\RouteCollection();
+
+$routes->add('home', new Routing\Route('/', [
+    '_controller' => 'Itech\Controller\AppController::index',
+], [], [], '', [], ['GET']));
+
 $routes->add('leap_year', new Routing\Route('/is_leap_year/{year}', [
     'year' => null,
     '_controller' => 'Calendar\Controller\LeapYearController::index',
@@ -31,5 +36,13 @@ $routes->add('update_article', new Routing\Route('/articles/{id}', [
 $routes->add('security_register', new Routing\Route('/register', [
     '_controller' => 'Itech\Controller\UserController::register',
 ], [], [], '', [], ['GET', 'POST']));
+
+$routes->add('security_login', new Routing\Route('/login', [
+    '_controller' => 'Itech\Controller\UserController::login',
+], [], [], '', [], ['GET', 'POST']));
+
+$routes->add('security_logout', new Routing\Route('/logout', [
+    '_controller' => 'Itech\Controller\UserController::logout',
+], [], [], '', [], ['GET']));
 
 return $routes;

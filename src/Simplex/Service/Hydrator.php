@@ -17,7 +17,7 @@ class Hydrator
      * @param array $data
      * @return object
      */
-    public static function hydrate(object $object, array $data)
+    public static function hydrate($object, array $data)
     {
         if (is_string($object)) {
             $object = new $object;

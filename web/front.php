@@ -33,6 +33,9 @@ $controllerResolver = new ControllerResolver();
 $argumentResolver = new ArgumentResolver();
 
 $framework = new Simplex\Framework($matcher, $controllerResolver, $argumentResolver);
+
+session_start();
+
 $response = $framework->handle($request);
 
 $response->send();
