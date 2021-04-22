@@ -61,10 +61,10 @@ class ProductManager extends Repository
         return Hydrator::hydrate(Product::class, $productData);
     }
 
-    public function findAll()
+    public function findBySellable()
     {
         $statement = $this->db->query(
-            'SELECT * FROM product'
+            'SELECT * FROM product WHERE sellable=1'
         );
         $productsData = $statement->fetchAll(\PDO::FETCH_ASSOC);
 

@@ -24,7 +24,7 @@ class AppController
             $security = $_SESSION['security'];
         }
 
-        $products = (new ProductManager())->findAll();
+        $products = (new ProductManager())->findBySellable();
 
         if (!$products) {
             $products = [];
