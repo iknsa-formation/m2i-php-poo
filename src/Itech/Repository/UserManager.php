@@ -57,4 +57,23 @@ class UserManager
 
         return Hydrator::hydrate(User::class, $userData);
     }
+
+    public function update(User $user, User $oldUser)
+    {
+        $statement = $this->db->prepare(
+            "UPDATE user SET firstName=:firstName, lastName=:lastName, email=:email, encryptedPassword=:encryptedPassword WHERE `email`=:oldEmail"
+        );
+        $statement->bindValue('firstName', $user->getFirstName());
+        $statement->bindValue('lastName', $user->getLastName());
+        $statement->bindValue('email', $user->getEmail());
+        $statement->bindValue('encryptedPassword', $user->getEncryptedPassword());
+        $statement->bindValue('oldEmail', $oldUser->getEmail());
+
+        if (!$statement->execute()) {
+            dd($statement->errorInfo());
+            return $statement->errorInfo();
+        }
+
+        return true;
+    }
 }

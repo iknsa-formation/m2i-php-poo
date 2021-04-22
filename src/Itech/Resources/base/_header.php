@@ -38,6 +38,7 @@
                     <?php if (isset($_SESSION['security'])): ?>
                         <a class="nav-item nav-link disabled" href="#">
                             Hello <?= $_SESSION['security']['user']->getFirstName(); ?></a>
+                        <a class="nav-item nav-link" href="/profile">Mon profile</a>
                         <a class="nav-item nav-link" href="/logout">Deconnexion</a>
                     <?php endif ?>
                 </div>

@@ -84,7 +84,7 @@ class User
         $this->password = $password;
 
         if ($password !== '') {
-            $this->encryptPassword();
+            $this->encryptPassword($password);
         }
 
         return $this;
@@ -144,9 +144,9 @@ class User
         return $this;
     }
 
-    private function encryptPassword(): User
+    private function encryptPassword(string $plainPassword): User
     {
-        $this->encryptedPassword = password_hash($this->getPassword(), PASSWORD_BCRYPT);
+        $this->encryptedPassword = password_hash($plainPassword, PASSWORD_BCRYPT);
 
         return $this;
     }

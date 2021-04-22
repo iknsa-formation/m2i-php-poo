@@ -96,4 +96,45 @@ class UserController
         unset($_SESSION['security']);
         header('Location: /login');
     }
+
+    public function profile(Request $request): Response
+    {
+        if (!isset($_SESSION['security']) || !$_SESSION['security']['isLoggedIn']) {
+            header('Location: /login');
+            exit;
+        }
+
+        if ($request->getMethod() === Request::METHOD_POST) {
+            $submittedData = Form::handleSubmit($request);
+
+            /** @var User $user */
+            $user = clone $_SESSION['security']['user'];
+            $user->setFirstName($submittedData->getFirstName());
+            $user->setLastName($submittedData->getLastName());
+            $user->setEmail($submittedData->getEmail());
+
+            if ($submittedData->getPassword() !== "") {
+                $user->setEncryptedPassword($submittedData->getEncryptedPassword());
+            }
+
+            $userManager = new UserManager();
+
+            if ($userManager->update($user, $_SESSION['security']['user']) !== true) {
+                header('Location: /profile?user-exists');
+                exit;
+            }
+
+            $_SESSION['security']['user'] = $user;
+            header('Location: /profile');
+            exit;
+        }
+
+        $templating = new Templating();
+
+        return new Response(
+            $templating->render('Itech::profile.php', [
+                'user' => $_SESSION['security']['user']
+            ])
+        );
+    }
 }

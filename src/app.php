@@ -45,4 +45,8 @@ $routes->add('security_logout', new Routing\Route('/logout', [
     '_controller' => 'Itech\Controller\UserController::logout',
 ], [], [], '', [], ['GET']));
 
+$routes->add('security_profile', new Routing\Route('/profile', [
+    '_controller' => 'Itech\Controller\UserController::profile',
+], [], [], '', [], ['GET', 'POST']));
+
 return $routes;
