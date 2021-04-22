@@ -28,18 +28,26 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="/">Home</a>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+
                     <?php if (!isset($_SESSION['security'])): ?>
-                        <a class="nav-item nav-link" href="/login">Login</a>
-                        <a class="nav-item nav-link" href="/register">Sign up</a>
+                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/register">Sign up</a></li>
                     <?php endif ?>
 
 
                     <?php if (isset($_SESSION['security'])): ?>
-                        <a class="nav-item nav-link disabled" href="#">
-                            Hello <?= $_SESSION['security']['user']->getFirstName(); ?></a>
-                        <a class="nav-item nav-link" href="/profile">Mon profile</a>
-                        <a class="nav-item nav-link" href="/logout">Deconnexion</a>
+                        <li class="nav-item"><a class="nav-link" href="/product/new">Vendre un produit</a></li>
+                    <?php endif ?>
+                    </ul>
+
+                    <?php if (isset($_SESSION['security'])): ?>
+                    <span class="navbar-text">
+                        | Hello <?= $_SESSION['security']['user']->getFirstName(); ?>
+                        <a class="" href="/profile">Mon profile</a>
+                        <a class="" href="/logout">Deconnexion</a>
+                    </span>
                     <?php endif ?>
                 </div>
             </div>

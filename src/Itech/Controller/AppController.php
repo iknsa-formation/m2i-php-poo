@@ -10,6 +10,8 @@
 namespace Itech\Controller;
 
 
+use Itech\Repository\ProductManager;
+
 use Simplex\Templating;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,9 +24,18 @@ class AppController
             $security = $_SESSION['security'];
         }
 
+        $products = (new ProductManager())->findAll();
+
+        if (!$products) {
+            $products = [];
+        }
+
         $templating = new Templating();
         return new Response(
-            $templating->render('Itech::home.php', ['security' => $security])
+            $templating->render('Itech::home.php', [
+                'security' => $security,
+                'products' => $products
+            ])
         );
     }
 }
