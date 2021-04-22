@@ -86,6 +86,12 @@ class ProductController extends Controller
 
     public function edit(Request $request, string $productId): Response
     {
+        if (!isset($_SESSION['security']) || !$_SESSION['security']['isLoggedIn']) {
+            return new RedirectResponse(
+                $this->urlGenerator->generate('security_login')
+            );
+        }
+
         if (!intval($productId)) {
             return new Response(
                 (new Templating())->render('Itech::error/404.php', [
@@ -146,6 +152,27 @@ class ProductController extends Controller
                     'action' => $this->urlGenerator
                         ->generate('product_edit', ['productId' => $product->getId()])
                 ]
+            ])
+        );
+    }
+
+    public function userList(): Response
+    {
+        if (!isset($_SESSION['security']) || !$_SESSION['security']['isLoggedIn']) {
+            return new RedirectResponse(
+                $this->urlGenerator->generate('security_login')
+            );
+        }
+
+        $products = (new ProductManager())->findByUser($_SESSION['security']['user']);
+
+        if (!$products) {
+            $products = [];
+        }
+
+        return new Response(
+            (new Templating())->render('Itech::product/list.php', [
+                'products' => $products
             ])
         );
     }

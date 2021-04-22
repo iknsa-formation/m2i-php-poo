@@ -16,6 +16,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
 </head>
 <body class="">
 
@@ -36,7 +38,6 @@
                         <li class="nav-item"><a class="nav-link" href="/register">Sign up</a></li>
                     <?php endif ?>
 
-
                     <?php if (isset($_SESSION['security'])): ?>
                         <li class="nav-item"><a class="nav-link" href="/product/new">Vendre un produit</a></li>
                     <?php endif ?>
@@ -45,6 +46,7 @@
                     <?php if (isset($_SESSION['security'])): ?>
                     <span class="navbar-text">
                         | Hello <?= $_SESSION['security']['user']->getFirstName(); ?>
+                        <a class="" href="/product/user">Mes produits</a>
                         <a class="" href="/profile">Mon profile</a>
                         <a class="" href="/logout">Deconnexion</a>
                     </span>

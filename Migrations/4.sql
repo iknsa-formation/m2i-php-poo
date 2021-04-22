@@ -4,6 +4,6 @@ CREATE TABLE `product` (
     `price` VARCHAR(255) NOT NULL,
     `user` INT(11) UNSIGNED NOT NULL,
     `sellable` BOOL,
-    UNIQUE `user_id_unique` (`id`),
+    UNIQUE `product_id_unique` (`id`),
     FOREIGN KEY (`user`) REFERENCES user(`id`)
 ) ENGINE = InnoDB;

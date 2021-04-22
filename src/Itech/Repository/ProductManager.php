@@ -85,15 +85,42 @@ class ProductManager extends Repository
 
         return $products;
     }
+
+    public function findByUser(User $user)
+    {
+        $statement = $this->db->query(
+            'SELECT * FROM product WHERE user=' . $user->getId()
+        );
+        $productsData = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+        if (!$productsData) {
+            return false;
+        }
+
+        $products = [];
+        foreach ($productsData as $productData) {
+
+            $statement = $this->db->query(
+                'SELECT * FROM user WHERE id=' . $productData['user']
+            );
+            $userData = $statement->fetch(\PDO::FETCH_ASSOC);
+            $productData['user'] = Hydrator::hydrate(User::class, $userData);
+            $products[] = Hydrator::hydrate(Product::class, $productData);
+        }
+
+        return $products;
+    }
+
     public function edit(Product $product)
     {
         try {
             $statement = $this->db->prepare(
-                "UPDATE `product` SET title=:title, price=:price, sellable=:sellable"
+                "UPDATE `product` SET title=:title, price=:price, sellable=:sellable WHERE id=:id"
             );
             $statement->bindValue('title', $product->getTitle());
             $statement->bindValue('price', $product->getPrice());
             $statement->bindValue('sellable', (int) $product->isSellable());
+            $statement->bindValue('id', $product->getId());
 
             if (!$statement->execute()) {
                 dd($statement->errorInfo());

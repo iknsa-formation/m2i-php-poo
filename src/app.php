@@ -49,6 +49,10 @@ $routes->add('security_profile', new Routing\Route('/profile', [
     '_controller' => 'Itech\Controller\UserController::profile',
 ], [], [], '', [], ['GET', 'POST']));
 
+$routes->add('product_user', new Routing\Route('/product/user', [
+    '_controller' => 'Itech\Controller\ProductController::userList',
+], [], [], '', [], ['GET']));
+
 $routes->add('product_new', new Routing\Route('/product/new', [
     '_controller' => 'Itech\Controller\ProductController::new',
 ], [], [], '', [], ['GET', 'POST']));
