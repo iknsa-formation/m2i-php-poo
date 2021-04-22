@@ -8,11 +8,10 @@
 ?>
 
 <?php
-if ($data['security']) {
-    echo $data['security']['user']->getFirstName();
-}
+require_once __DIR__ . '/../base/_header.php';
 ?>
-<br>
-<a href="/logout">Deconnexion</a>
-<br>
+
 My super hot home page
+
+<?php
+require_once __DIR__ . '/../base/_footer.php';

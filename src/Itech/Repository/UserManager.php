@@ -34,10 +34,14 @@ class UserManager
             $statement->bindValue('email', $user->getEmail());
             $statement->bindValue('encryptedPassword', $user->getEncryptedPassword());
 
-            $statement->execute();
+            if (!$statement->execute()) {
+                return $statement->errorInfo();
+            }
         } catch (\PDOException $exception) {
             dd($exception);
         }
+
+        return true;
     }
 
     public function findByEmail(string $email)

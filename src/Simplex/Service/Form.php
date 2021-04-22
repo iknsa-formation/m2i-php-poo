@@ -28,7 +28,8 @@ class Form
                         throw new FileNotFoundException();
                     }
                 } catch (FileNotFoundException $e) {
-                    dd($e);
+                    // trigger alert
+                    // log($e);
                 }
 
                 $class = $module . '\\Model\\' . $className;
@@ -38,7 +39,7 @@ class Form
                         throw new ClassNotFoundException();
                     }
                 } catch (ClassNotFoundException $e) {
-                    dd($e);
+                    // log($e);
                 }
 
                 $object = new $class;

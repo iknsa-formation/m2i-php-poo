@@ -32,7 +32,13 @@ class UserController
             /** @var User $user */
             $user = Form::handleSubmit($request);
 
-            (new UserManager())->create($user);
+            if ($isUserCreated = (new UserManager())->create($user) !== true) {
+                header('Location: /register?user-exists');
+                exit;
+            }
+
+            header('Location: /login');
+            exit;
         }
 
         $templating = new Templating();
@@ -61,17 +67,18 @@ class UserController
                 exit;
             }
 
-            if ($user->verifyPassword($submittedData->getPassword())) {
-                // User est valide
-                // Mettre en session
-                $_SESSION['security'] = [
-                    'user' => $user,
-                    'isLoggedIn' => true
-                ];
-
-                header('Location: /');
+            if (!$user->verifyPassword($submittedData->getPassword())) {
+                header('Location: /login?no-user');
                 exit;
             }
+
+            $_SESSION['security'] = [
+                'user' => $user,
+                'isLoggedIn' => true
+            ];
+
+            header('Location: /');
+            exit;
         }
 
         $templating = new Templating();
