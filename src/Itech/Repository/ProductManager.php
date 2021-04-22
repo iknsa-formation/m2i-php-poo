@@ -85,4 +85,23 @@ class ProductManager extends Repository
 
         return $products;
     }
+    public function edit(Product $product)
+    {
+        try {
+            $statement = $this->db->prepare(
+                "UPDATE `product` SET title=:title, price=:price, sellable=:sellable"
+            );
+            $statement->bindValue('title', $product->getTitle());
+            $statement->bindValue('price', $product->getPrice());
+            $statement->bindValue('sellable', (int) $product->isSellable());
+
+            if (!$statement->execute()) {
+                dd($statement->errorInfo());
+            }
+
+            return $product;
+        } catch (\PDOException $exception) {
+            dd($exception);
+        }
+    }
 }

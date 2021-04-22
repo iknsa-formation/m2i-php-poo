@@ -53,6 +53,10 @@ $routes->add('product_new', new Routing\Route('/product/new', [
     '_controller' => 'Itech\Controller\ProductController::new',
 ], [], [], '', [], ['GET', 'POST']));
 
+$routes->add('product_edit', new Routing\Route('/product/edit/{productId}', [
+    '_controller' => 'Itech\Controller\ProductController::edit',
+], [], [], '', [], ['GET', 'POST']));
+
 $routes->add('product_show', new Routing\Route('/product/{productId}', [
     '_controller' => 'Itech\Controller\ProductController::show',
 ], [], [], '', [], ['GET']));
